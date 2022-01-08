@@ -13,7 +13,7 @@ const spawn = require('child_process').spawn;
  * @param  {object}           objOptions Optional stream options
  * @return {StreamDispatcher} Regular StreamDispatcher
  */
-const playArbitraryFFmpeg = function(objVoiceConnection, arrFFmpegParams, objOptions) {
+const playArbitraryFFmpeg = function( arrFFmpegParams, objOptions) {
   objOptions = objOptions || { type: 'converted', bitrate: 'auto' };
   const arrStandardParams = [
     '-f', 'wav',
@@ -21,7 +21,7 @@ const playArbitraryFFmpeg = function(objVoiceConnection, arrFFmpegParams, objOpt
   ];
   const arrFinalParams = arrFFmpegParams.concat(arrStandardParams);
   let ffmpeg = spawn('ffmpeg', arrFinalParams);
-  return objVoiceConnection.play(ffmpeg.stdout, objOptions);
+  return ffmpeg;
 };
 
 module.exports = playArbitraryFFmpeg;
